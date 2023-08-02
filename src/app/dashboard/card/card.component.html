@@ -2,14 +2,22 @@
   <mat-card-header>
     <mat-card-title>{{card.name}}</mat-card-title>
   </mat-card-header>
-  <img mat-card-image [src]="card.pic" alt="Photo of a Shiba Inu">
+  <img width="200px" height="200px" [src]="card.pic" alt="Photo of a Shiba Inu">
   <mat-card-content>
     <p>
       {{card.description}}
     </p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button>LIKE {{card.likes}}</button>
-    <button mat-button>SHARE</button>
+    <div *ngIf="card.likes < 5">
+      <button color="primary" mat-button (click)="onLike(card.id)">LIKE {{card.likes}}</button>
+    </div>
+    <div *ngIf="card.likes >= 5 && card.likes <= 10">
+      <button color="accent" mat-button (click)="onLike(card.id)">LIKE {{card.likes}}</button>
+    </div>
+    <div *ngIf="card.likes > 10">
+      <button color="secondary" mat-button (click)="onLike(card.id)">LIKE {{card.likes}}</button>
+    </div>
+    <button mat-button (click)="onShare(card.id)">SHARE</button>
   </mat-card-actions>
 </mat-card>
